@@ -3,7 +3,7 @@ import io from "socket.io-client";
 
 
 
-const ENDPOINT = 'https://11c8a7c1c9e8.ngrok.io/';
+const ENDPOINT = 'https://11c8a7c1c9e8.ngrok.io';
 
 function Chat(props) {
     const [message, setMessage] = useState('');
