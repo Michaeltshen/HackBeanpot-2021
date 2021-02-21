@@ -1,0 +1,7 @@
+.taskDiv {
+    border: 1px solid black;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}

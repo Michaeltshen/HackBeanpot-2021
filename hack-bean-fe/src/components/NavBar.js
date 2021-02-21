@@ -5,6 +5,7 @@ import Tab from '@material-ui/core/Tab';
 import Calendar from "@ericz1803/react-google-calendar";
 import Drawer from '@material-ui/core/Drawer';
 import Chat from './Chat';
+import TaskDashboard from './TaskDashboard'
 
 
 const API_KEY = "AIzaSyAqdfAT3JX4Moek7_d2vdnGOVqH1Z1D6BY";
@@ -22,7 +23,11 @@ const appBar = {
 function NavBar() {
 
     const [renderChat, setRenderChat] = useState(false);
+    const [renderTaskDashboard, setRenderTaskDashboard] = useState(true);
     const renderContent = () => {
+        if (renderTaskDashboard) {
+            return <TaskDashboard />;
+        }
         if (renderChat) {
             return (
                 <Chat/>
