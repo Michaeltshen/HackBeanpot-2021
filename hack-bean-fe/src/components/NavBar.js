@@ -59,7 +59,9 @@ function NavBar(props) {
     const [value, setValue] = React.useState(0);
     const tasks = props?.tasks;
     const currentUser = props?.currentUser;
+    const users = props?.users;
 
+    console.log("TASKS IN NAVBAR", tasks);
     let styles = {
         //you can use object styles (no import required)
         calendar: {
@@ -109,7 +111,7 @@ function NavBar(props) {
                         overflow: "hidden"
 
                     }}>
-                    <TaskDashboard tasks={tasks} />
+                    <TaskDashboard tasks={tasks} users={users} />
                     </div>
             </TabPanel>
             <TabPanel value={value} index={1}>

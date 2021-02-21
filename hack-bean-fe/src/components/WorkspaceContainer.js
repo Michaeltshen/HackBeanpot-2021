@@ -42,9 +42,15 @@ function WorkspaceContainer(props) {
         if (userId) {
             const url = "http://localhost:8080/" + `${BACKEND_API_URL}/users/getUser`;
             console.log(url);
-            const response = await axios.post(url, {id: userId})
+            let response = await axios.post(url, {id: userId})
+
             if (response) {
-                setUser(response.data[0])
+                response.data[0].projects[1].tasks = {
+                    "toDo": [{"name": "Fill out request sheet", "assignee": "06f16e00-740b-11eb-8c66-f9629119ca23"}],
+                    "inProgress": [{"name": "Finish re scripting homework task", "assignee": "06f16e00-740b-11eb-8c66-d8k3af119ca23"}],
+                    "completed": [{"name": "Talk to Ms.Tofel about hacking method", "assignee": "06f16e00-740b-11eb-8c66-d8928k23fa"}]
+                }
+                setUser(response.data[0]);
                 setCurrentProject(response?.data[0]?.projects[0]);
                 setLoading(false);
             }
@@ -69,17 +75,40 @@ function WorkspaceContainer(props) {
        
     }
 
+    const addProject = () => {
+
+        const project = {
+            projectName: "New Test Project",
+            projectId: uuid(),
+            tasks: {
+                toDo: [],
+                inProgress: [],
+                complete: []
+            }
+
+        }
+        let temp = user;
+        temp.projects = [...temp.projects, ...[project]];
+        setUser(temp);
+        let temp1 = users.filter(user1 => user1.id !== temp.id);
+        setUsers([...temp1, ...[temp]])
+        setProjects([...projects, ...[project]]);
+    }
+
     const getUsersForProject = () => {
         return users.filter(user => user.projects.some(project => project.projectId === currentProject.projectId));
     }
 
+    console.log("currProj", currentProject);
+
     const getUserTasks = () => {
+        //console.log("what does this give", projects.filter(project => project?.projectId === currentProject?.projectId))
         let tasks =  projects.filter(project => project?.projectId === currentProject?.projectId)[0]?.tasks;
         if (tasks) {
-            console.log("tasks", tasks);
-            tasks.toDo = tasks?.toDo.filter(item => item.assignee === user?.id);
-            tasks.inProgress = tasks?.inProgress.filter(item => item.assignee === user?.id);
-            tasks.completed = tasks?.completed.filter(item => item.assignee === user?.id);
+            //console.log("tasks", tasks);
+            tasks.toDo = tasks?.toDo?.filter(item => item.assignee === user?.id);
+            tasks.inProgress = tasks?.inProgress?.filter(item => item.assignee === user?.id);
+            tasks.completed = tasks?.completed?.filter(item => item.assignee === user?.id);
         }
         
         return tasks;
@@ -94,11 +123,11 @@ function WorkspaceContainer(props) {
     }
     return (
         <div style={{display: 'flex', flexDirection: 'row'}}>
-            <ProjectPane projects={user?.projects} currentProject={currentProject} setCurrentProject={setCurrentProject} users={getUsersForProject()} currentUser={user}/>
+            <ProjectPane projects={user?.projects} currentProject={currentProject} setCurrentProject={setCurrentProject} users={getUsersForProject()} currentUser={user} addProject={addProject}/>
             {/* <ParticipantsPane /> */}
-            <NavBar currentProject={currentProject} tasks={getUserTasks()} currentUser={user}/>
+            <NavBar currentProject={currentProject} tasks={currentProject?.tasks} currentUser={user} users={users}/>
             {/* YOU NEED TO SWITCH BETWEEN CALENDAR, TASK DASHBOARD, AND CHAT VIEW */}
-            <TaskView tasks={getUserTasks()} />
+            <TaskView tasks={getUserTasks()}  />
         </div>
     );
 }

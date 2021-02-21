@@ -47,7 +47,7 @@ function ProjectPane(props) {
                             </div>
                         )
                     })}
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <div onClick={props?.addProject}style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         <AddIcon />
                         <p>Add Project</p>
                     </div>
@@ -60,7 +60,7 @@ function ProjectPane(props) {
                         return (
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                 <PersonIcon></PersonIcon>
-                                <p style={{fontWeight: `${user?.id === currentUser?.id ? 'bold' : null}`}}>{`${user?.name}`}</p>
+                                <p >{`${user?.name}`}</p>
                                 {user?.id === currentUser?.id &&
                                 <span style={{fontSize: '12px', color: 'lightgray'}}>(You)</span>}
                         </div>

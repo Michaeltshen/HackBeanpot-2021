@@ -63,7 +63,7 @@ function TaskDashboard(props) {
                         <h2>To Do</h2>
                         {tasks?.toDo?.map((task, index) => (
                             <Draggable>
-                                <p>{task?.name}</p>
+                                <p>{task?.name} ({props?.users.find(user => user?.id === task?.assignee).name?.split(" ")[0]})</p>
                             </Draggable>
 
                         ))}
@@ -74,7 +74,7 @@ function TaskDashboard(props) {
                         <h2>In Progress</h2>
                         {tasks?.inProgress?.map((task, index) => (
                             <Draggable>
-                                <p>{task?.name}</p>
+                                <p>{task?.name} ({props?.users.find(user => user?.id === task?.assignee).name?.split(" ")[0]})</p>
                             </Draggable>
                         ))}
                     </div>
@@ -82,9 +82,9 @@ function TaskDashboard(props) {
                 <Paper style={{ backgroundColor: "#23562e", color: "white" }} className="taskDiv" elevation="10">
                     <div style={completedStyle}>
                         <h2>Completed</h2>
-                        {tasks?.completed.map((task, index) => (
+                        {tasks?.completed?.map((task, index) => (
                             <Draggable>
-                                <p>{task?.name}</p>
+                                <p>{task?.name} ({props?.users.find(user => user?.id === task?.assignee).name?.split(" ")[0]})</p>
                             </Draggable>
                         ))}
                     </div>

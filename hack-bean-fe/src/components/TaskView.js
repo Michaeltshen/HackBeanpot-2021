@@ -30,7 +30,7 @@ function TaskView(props) {
                 </div>
                 <button class="accordion3" style={{textAlign:"center"}}>Completed</button>
                 <div class="panel">
-                    {tasks?.completed.map((task, index) => {
+                    {tasks?.completed?.map((task, index) => {
                         return (<p>{task?.name}</p>)
                     })}         
                 </div>
