@@ -45,11 +45,6 @@ function WorkspaceContainer(props) {
             let response = await axios.post(url, {id: userId})
 
             if (response) {
-                response.data[0].projects[1].tasks = {
-                    "toDo": [{"name": "Fill out request sheet", "assignee": "06f16e00-740b-11eb-8c66-f9629119ca23"}],
-                    "inProgress": [{"name": "Finish re scripting homework task", "assignee": "06f16e00-740b-11eb-8c66-d8k3af119ca23"}],
-                    "completed": [{"name": "Talk to Ms.Tofel about hacking method", "assignee": "06f16e00-740b-11eb-8c66-d8928k23fa"}]
-                }
                 setUser(response.data[0]);
                 setCurrentProject(response?.data[0]?.projects[0]);
                 setLoading(false);
