@@ -13,7 +13,6 @@ function TaskView(props) {
         <Drawer variant="permanent" anchor="right">
             <div style={{ color: "white", width: '175px', height: "100%", textAlign: 'center', backgroundColor: "#4c7c54" }}>
                 <h3 style={{fontSize:"1.5em"}}>Your assigned tasks</h3>
-                <h4 style={{fontSize:"1.5em", backgroundColor:"#ea9999"}}>To Do:</h4>
                 <button class="accordion1" style={{textAlign:"center"}}>To Do</button>
                 <div class="panel">
                     {TODO.map((task, index) => {
