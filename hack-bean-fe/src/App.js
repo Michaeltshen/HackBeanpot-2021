@@ -20,7 +20,9 @@ function App() {
       <div id="homeButtons">
         <SimpleModal />
         <Link to="/workspace">
-          <button >View Current Projects</button>
+        <div className="mainButton">
+          <button className="mainButton">View Current Projects</button>
+        </div>
         </Link>
       </div>
 

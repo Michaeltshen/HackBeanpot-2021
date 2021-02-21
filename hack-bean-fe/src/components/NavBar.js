@@ -47,8 +47,6 @@ function NavBar() {
                     width: `calc(100% - 475px)`,
                     marginLeft: '300px',
                     marginRight: '175px',
-                    
-
                 }}
             >
                 {renderContent()}
