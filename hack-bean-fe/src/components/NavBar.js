@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Calendar from "@ericz1803/react-google-calendar";
 import Drawer from '@material-ui/core/Drawer';
+import Chat from './Chat';
 
 
 const API_KEY = "AIzaSyAqdfAT3JX4Moek7_d2vdnGOVqH1Z1D6BY";
@@ -19,6 +20,18 @@ const appBar = {
 }
 
 function NavBar() {
+
+    const [renderChat, setRenderChat] = useState(false);
+    const renderContent = () => {
+        if (renderChat) {
+            return (
+                <Chat/>
+            )
+        }
+        return (
+            <Calendar apiKey={API_KEY} calendars={calendars} style={{width: `calc(100% - 475px)`}}  />
+        )
+    }
     return (
         <div>
             <AppBar position="fixed" style={appBar}>
@@ -38,9 +51,7 @@ function NavBar() {
 
                 }}
             >
-                <div>
-                <Calendar apiKey={API_KEY} calendars={calendars} style={{width: `calc(100% - 475px)`}}  />
-                </div>
+                {renderContent()}
             </div>
         </div>
 
