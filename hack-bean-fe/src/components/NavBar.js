@@ -6,7 +6,8 @@ import Calendar from "@ericz1803/react-google-calendar";
 import Drawer from '@material-ui/core/Drawer';
 import Chat from './Chat';
 import TaskDashboard from './TaskDashboard'
-
+import cotton_candy_scene from '../images/cotton_candy_scene.jpg'
+import { Hidden } from '@material-ui/core';
 
 const API_KEY = "AIzaSyAqdfAT3JX4Moek7_d2vdnGOVqH1Z1D6BY";
 let calendars = [
@@ -47,12 +48,12 @@ function NavBar() {
             <div
                 style={{
                     paddingTop: "75px",
-                    paddingBottom: "75px",
+                    paddingBottom: "0px",
                     //margin: "auto",
                     width: `calc(100% - 475px)`,
                     marginLeft: '300px',
                     marginRight: '175px',
-                    
+                    overflow: "hidden"
 
                 }}
             >
