@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const BACKEND_API_URL = "https://b1e082a77b5c.ngrok.io/api"
+const BACKEND_API_URL = "https://11c8a7c1c9e8.ngrok.io/api"
 
 function Test() {
 

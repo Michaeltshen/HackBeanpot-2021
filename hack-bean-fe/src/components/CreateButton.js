@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import './CreateButton.css'
+import axios from 'axios';
+import {v1 as uuid} from "uuid"; 
+
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -30,14 +33,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleModal() {
+const BACKEND_API_URL = "https://11c8a7c1c9e8.ngrok.io/api"
+
+export default function SimpleModal(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [projectName, setProjectName] = React.useState("");
+  const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [projectName, setProjectName] = useState("");
+  const [calendarLink, setCalendarLink] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -47,23 +53,39 @@ export default function SimpleModal() {
     setOpen(false);
   };
 
+  const createUserData = async() => {
+
+    const id = uuid();
+    console.log(id);
+    localStorage.setItem("userId", id);
+    const projects = [{projectId: uuid(), projectName}];
+    console.log({name, email, projects, calendarLink, id});
+    const url = "https://cors-anywhere.herokuapp.com/" + `${BACKEND_API_URL}/users/createUser`;
+    const response = await axios.post(url, {name, email, projects, calendarLink, id});
+    if (response) {
+      window.location.replace("/workspace?userId=" + id);
+    }
+
+
+  }
+
 
   const body = (
     <div id = "projectForm" style={modalStyle} className={classes.paper}>
       <h1 id="simple-modal-title" style={{fontSize:"2em", textAlign:"center"}}>Create Your Project</h1>
       <label> Name: </label>
-      <input type="text" name="name" /> 
+      <input onChange={(e) => setName(e.target.value)}type="text" name="name" /> 
       <p></p>
       <label> Email: </label>
-      <input type="text" name="email" />
+      <input onChange={(e) => setEmail(e.target.value)} type="text" name="email" />
       <p></p>
       <label> Project Name: </label>
-      <input type="text" name="projName" />
+      <input onChange={(e) => setProjectName(e.target.value)}type="text" name="projName" />
       <p></p>
       <label> Google Calendar Link (Optional): </label>
-      <input type="text" name="calLink" />
+      <input onChange={(e) => setCalendarLink(e.target.value)} type="text" name="calLink" />
       <p></p>
-      <button id="projectSubmit">Submit</button>
+      <button onClick={createUserData}id="projectSubmit">Submit</button>
       <p></p>
     </div>
   );
