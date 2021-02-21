@@ -56,7 +56,6 @@ function NavBar(props) {
                         </Tabs>
                         </Paper>
                     {/* <p style={{textAlign: 'center'}}>Campus Hackathon Chat[COOL KIDS]</p> */}
-                    <p style={{textAlign: 'center'}}>{`${currentProject?.projectName} CHAT - [COOL KIDS]`}</p>
                 </div>
             </AppBar>
             <div
