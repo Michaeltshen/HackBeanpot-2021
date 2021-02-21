@@ -91,7 +91,7 @@ export default function SimpleModal(props) {
   );
 
   return (
-    <div id="CreateButton">
+    <div className="mainButton" id="CreateButton">
       <button type="button" onClick={handleOpen}>
         New User? Create a Project
       </button>
