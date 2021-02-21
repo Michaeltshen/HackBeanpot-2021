@@ -23,7 +23,9 @@ const BACKEND_API_URL = "https://11c8a7c1c9e8.ngrok.io/api"
 function WorkspaceContainer(props) {
     const query = useQuery();
     const [loading, setLoading] = useState(true);
+    const [currentProject, setCurrentProject] = useState(null);
     const [user, setUser] = useState(null);
+    const [users, setUsers] = useState([])
     useEffect(() => {
         getUserData()
     }, [])
@@ -35,14 +37,24 @@ function WorkspaceContainer(props) {
     const getUserData = async() => {
         const userId = query.get("userId")
         if (userId) {
-            const url = "https://cors-anywhere.herokuapp.com/" + `${BACKEND_API_URL}/users/getUser`;
+            const url = "http://localhost:8080/" + `${BACKEND_API_URL}/users/getUser`;
+            console.log(url);
             const response = await axios.post(url, {id: userId})
             if (response) {
                 setUser(response.data[0])
+                setCurrentProject(response?.data[0]?.projects[0]);
                 setLoading(false);
             }
          }
         
+    }
+
+    const fetchAllUsers = async() => {
+        const url = "https://cors-anywhere.herokuapp.com/" + `${BACKEND_API_URL}/users/getUsers`;
+        const response = await axios.get(url);
+        console.log(response);
+        setUsers(response.data);
+
     }
 
     if (loading) {
@@ -54,7 +66,7 @@ function WorkspaceContainer(props) {
     }
     return (
         <div style={{display: 'flex', flexDirection: 'row'}}>
-            <ProjectPane projects={user?.projects}/>
+            <ProjectPane projects={user?.projects} currentProject={currentProject} setCurrentProject={setCurrentProject}/>
             {/* <ParticipantsPane /> */}
             <NavBar />
             {/* YOU NEED TO SWITCH BETWEEN CALENDAR, TASK DASHBOARD, AND CHAT VIEW */}

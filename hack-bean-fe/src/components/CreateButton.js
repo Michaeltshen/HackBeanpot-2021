@@ -60,7 +60,7 @@ export default function SimpleModal(props) {
     localStorage.setItem("userId", id);
     const projects = [{projectId: uuid(), projectName}];
     console.log({name, email, projects, calendarLink, id});
-    const url = "https://cors-anywhere.herokuapp.com/" + `${BACKEND_API_URL}/users/createUser`;
+    const url = "http://localhost:8080/" + `${BACKEND_API_URL}/users/createUser`;
     const response = await axios.post(url, {name, email, projects, calendarLink, id});
     if (response) {
       window.location.replace("/workspace?userId=" + id);
