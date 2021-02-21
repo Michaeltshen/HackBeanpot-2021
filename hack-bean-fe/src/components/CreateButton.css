@@ -1,0 +1,39 @@
+button {
+    background-color: rgba(252,209,42);
+    border-radius: 12em;
+    padding: 1em 1em;
+    font-family: Arial, Helvetica, sans-serif, avantgarde;
+    border: 2px solid lightyellow;
+    cursor: pointer;
+    margin: 2vh;
+    width: 200px
+} 
+
+label {
+    color: black;
+    padding:0.1em;
+    display:grid;
+    grid-gap:1em;
+}
+
+#homeButtons {
+    display: flex;
+    justify-content: center;
+}
+
+#projectForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#projectSubmit {
+    align-self: center;
+}
+
+input {
+    width: 100%;
+}
+
+li {
+    list-style-type: none
+}
