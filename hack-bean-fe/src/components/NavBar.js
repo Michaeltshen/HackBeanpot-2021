@@ -19,8 +19,9 @@ const appBar = {
 
 }
 
-function NavBar() {
+function NavBar(props) {
 
+    const currentProject = props.currentProject;
     const [renderChat, setRenderChat] = useState(false);
     const renderContent = () => {
         if (renderChat) {
@@ -36,7 +37,7 @@ function NavBar() {
         <div>
             <AppBar position="fixed" style={appBar}>
                 <div style={{background:"#78a5cd"}}>
-                    <p style={{textAlign: 'center'}}>Campus Hackathon Chat[COOL KIDS]</p>
+                    <p style={{textAlign: 'center'}}>{`${currentProject?.projectName} CHAT - [COOL KIDS]`}</p>
                 </div>
             </AppBar>
             <div

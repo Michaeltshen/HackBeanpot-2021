@@ -26,8 +26,11 @@ function WorkspaceContainer(props) {
     const [currentProject, setCurrentProject] = useState(null);
     const [user, setUser] = useState(null);
     const [users, setUsers] = useState([])
+    const [projects, setProjects] = useState([]);
     useEffect(() => {
         getUserData()
+        fetchAllUsers();
+        fetchAllProjects();
     }, [])
 
     function useQuery() {
@@ -35,7 +38,7 @@ function WorkspaceContainer(props) {
     }
 
     const getUserData = async() => {
-        const userId = query.get("userId")
+        const userId = query.get("userId") ? query.get("userId") : localStorage.getItem('userId')
         if (userId) {
             const url = "http://localhost:8080/" + `${BACKEND_API_URL}/users/getUser`;
             console.log(url);
@@ -50,11 +53,36 @@ function WorkspaceContainer(props) {
     }
 
     const fetchAllUsers = async() => {
-        const url = "https://cors-anywhere.herokuapp.com/" + `${BACKEND_API_URL}/users/getUsers`;
+        const url = "http://localhost:8080/" + `${BACKEND_API_URL}/users/getUsers`;
         const response = await axios.get(url);
         console.log(response);
         setUsers(response.data);
 
+    }
+
+    const fetchAllProjects = async() => {
+        const url = "http://localhost:8080/" + `${BACKEND_API_URL}/projects`;
+        const response = await axios.get(url);
+        if (response.data) {
+            setProjects(response.data);
+        }
+       
+    }
+
+    const getUsersForProject = () => {
+        return users.filter(user => user.projects.some(project => project.projectId === currentProject.projectId));
+    }
+
+    const getUserTasks = () => {
+        let tasks =  projects.filter(project => project?.projectId === currentProject?.projectId)[0]?.tasks;
+        if (tasks) {
+            console.log("tasks", tasks);
+            tasks.toDo = tasks?.toDo.filter(item => item.assignee === user?.id);
+            tasks.inProgress = tasks?.inProgress.filter(item => item.assignee === user?.id);
+            tasks.completed = tasks?.completed.filter(item => item.assignee === user?.id);
+        }
+        
+        return tasks;
     }
 
     if (loading) {
@@ -66,11 +94,11 @@ function WorkspaceContainer(props) {
     }
     return (
         <div style={{display: 'flex', flexDirection: 'row'}}>
-            <ProjectPane projects={user?.projects} currentProject={currentProject} setCurrentProject={setCurrentProject}/>
+            <ProjectPane projects={user?.projects} currentProject={currentProject} setCurrentProject={setCurrentProject} users={getUsersForProject()}/>
             {/* <ParticipantsPane /> */}
-            <NavBar />
+            <NavBar currentProject={currentProject}/>
             {/* YOU NEED TO SWITCH BETWEEN CALENDAR, TASK DASHBOARD, AND CHAT VIEW */}
-            <TaskView />
+            <TaskView tasks={getUserTasks()} />
         </div>
     );
 }

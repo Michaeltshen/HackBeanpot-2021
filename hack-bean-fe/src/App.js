@@ -7,6 +7,7 @@ import SimpleModal from './components/CreateButton';
 import cotton_candy_scene from './images/cotton_candy_scene.jpg'
 import WorkspaceContainer from './components/WorkspaceContainer';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import './components/CreateButton.css'
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
       <div id="homeButtons">
         <SimpleModal />
         <Link to="/workspace">
-          <button >View Current Projects</button>
+        <div className="mainButton">
+          <button className="mainButton">View Current Projects</button>
+        </div>
         </Link>
       </div>
 

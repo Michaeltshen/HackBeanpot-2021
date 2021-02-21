@@ -10,8 +10,10 @@ import { Link } from 'react-router-dom';
 function ProjectPane(props) {
     const projects = props?.projects;
     const currentProject = props?.currentProject;
+    const users = props?.users;
     console.log("projects", projects);
     console.log("curr Proj", currentProject);
+    console.log("users", users);
     const projStyle = {
         color: "white", 
         display: 'flex', 
@@ -35,15 +37,13 @@ function ProjectPane(props) {
             <div style={{
                 color: "white", display: 'flex', flexDirection: 'row', height: '100%', width: "300px", background: "#23562e"}}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', padding: '15px', width: '150px', }}>
-                    <h3>{`Projects (${projects.length})`}</h3>
+                    <h4>{`Projects (${projects.length})`}</h4>
                     {projects.map((project, index) => {
                         return (
-                            <Link style={{color: 'white'}}>
                             <div key={index} onClick={(e) => changeCurrentProject(project)}style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', borderBottom: project?.projectId === currentProject?.projectId ? '4px solid yellow' : '', cursor: 'pointer'}}>
                                 <AssignmentIndIcon></AssignmentIndIcon>
                                 <p>{project.projectName}</p>
                             </div>
-                            </Link>
                         )
                     })}
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
@@ -54,23 +54,15 @@ function ProjectPane(props) {
 
                 </div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', padding: '15px', backgroundColor: "#4c7c54", width: "150px" }}>
-                    <h3>Members</h3>
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <PersonIcon></PersonIcon>
-                        <p>Ritik Gupta</p>
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <PersonIcon></PersonIcon>
-                        <p>Miraj Desai</p>
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <PersonIcon></PersonIcon>
-                        <p>Anurag Arasan</p>
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <PersonIcon></PersonIcon>
-                        <p>Michael Shen</p>
-                    </div>
+                    <h4 >{`Members (${users?.length})`}</h4>
+                    {users.map((user, index) => {
+                        return (
+                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                <PersonIcon></PersonIcon>
+                                <p>{user?.name}</p>
+                        </div>
+                        )
+                    })}
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         <AddIcon />
                         <p style={{}}>Add Member</p>
