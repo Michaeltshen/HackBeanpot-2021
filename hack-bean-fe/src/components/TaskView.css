@@ -1,0 +1,71 @@
+ /* Style the buttons that are used to open and close the accordion panel */
+ .accordion1 {
+    background-color: #ea9999;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 1em;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    transition: 0.4s;
+    margin: 0em;
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .active, .accordion1:hover {
+    background-color: #e06666;
+  }
+  
+  .accordion2 {
+    background-color: #f6b26b;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 1em;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    transition: 0.4s;
+    margin: 0em;
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .active, .accordion2:hover {
+    background-color: #e69138;
+  }
+
+  .accordion3 {
+    background-color: #93c47d;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 1em;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    transition: 0.4s;
+    margin: 0em;
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .active, .accordion3:hover {
+    background-color: #6aa84f;
+  }
+
+  /* Style the accordion panel. Note: hidden by default */
+  .panel {
+    padding: 0 18px;
+    background-color: transparent;
+    /* display: none; */
+    overflow: hidden;
+  } 

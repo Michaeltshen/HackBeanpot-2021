@@ -6,6 +6,8 @@ import SimpleModal from './components/CreateButton';
 // import NextModal from './components/projectButton';
 import cotton_candy_scene from './images/cotton_candy_scene.jpg'
 import WorkspaceContainer from './components/WorkspaceContainer';
+import './components/CreateButton.css';
+
 function App() {
   const [newPage, setNewPage] = useState(false);
 
@@ -22,7 +24,9 @@ function App() {
         <Test/>
         <div id = "homeButtons">
           <SimpleModal/>
-          <button onClick={(e) => setNewPage(true)}>View Current Projects</button>
+          <div className="mainButton">
+            <button onClick={(e) => setNewPage(true)}>View Current Projects</button>
+          </div>
         </div>
         
     </div>

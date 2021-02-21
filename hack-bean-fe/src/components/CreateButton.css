@@ -1,4 +1,4 @@
-button {
+.mainButton button {
     background-color: rgba(252,209,42);
     border-radius: 12em;
     padding: 1em 1em;
@@ -6,7 +6,7 @@ button {
     border: 2px solid lightyellow;
     cursor: pointer;
     margin: 2vh;
-    width: 200px
+    width: 20em;
 } 
 
 label {
