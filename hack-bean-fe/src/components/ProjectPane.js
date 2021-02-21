@@ -11,6 +11,7 @@ function ProjectPane(props) {
     const projects = props?.projects;
     const currentProject = props?.currentProject;
     const users = props?.users;
+    const currentUser = props?.currentUser;
     console.log("projects", projects);
     console.log("curr Proj", currentProject);
     console.log("users", users);
@@ -36,7 +37,7 @@ function ProjectPane(props) {
         <Drawer anchor="left" variant="permanent"  >
             <div style={{
                 color: "white", display: 'flex', flexDirection: 'row', height: '100%', width: "300px", background: "#23562e"}}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', padding: '15px', width: '150px', }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', padding: '15px', width: '120px' }}>
                     <h4>{`Projects (${projects.length})`}</h4>
                     {projects.map((project, index) => {
                         return (
@@ -53,13 +54,15 @@ function ProjectPane(props) {
 
 
                 </div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', padding: '15px', backgroundColor: "#4c7c54", width: "150px" }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', padding: '15px', backgroundColor: "#4c7c54", width: '120px'  }}>
                     <h4 >{`Members (${users?.length})`}</h4>
                     {users.map((user, index) => {
                         return (
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                 <PersonIcon></PersonIcon>
-                                <p>{user?.name}</p>
+                                <p style={{fontWeight: `${user?.id === currentUser?.id ? 'bold' : null}`}}>{`${user?.name}`}</p>
+                                {user?.id === currentUser?.id &&
+                                <span style={{fontSize: '12px', color: 'lightgray'}}>(You)</span>}
                         </div>
                         )
                     })}

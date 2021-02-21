@@ -1,40 +1,93 @@
 import React, { useEffect, useState } from 'react';
-import io from "socket.io-client";
+import ChatBox, { ChatFrame } from 'react-chat-plugin';
+import './Chat.css';
+
 
 
 
 const ENDPOINT = 'https://11c8a7c1c9e8.ngrok.io';
+const windowWidth = window.innerWidth;
+const windowHeight = window.innerHeight;
+
 
 function Chat(props) {
-    const [message, setMessage] = useState('');
-    const [messages, setMessages] = useState([]);
-    useEffect(() => {
-        const socket = io(ENDPOINT, { transports: ['websocket', 'polling', 'flashsocket'] });
-        socket.on('join', (message) => {
-            console.log(message)
-        });
+    const currentUser = props?.currentUser;
+    const [messages, setMessages] = useState(
+        [
+            {
+                text: 'user2 has joined the conversation',
+                timestamp: 1578366389250,
+                type: 'notification',
+            },
+            {
+                author: {
+                    username: currentUser?.name.split(" ")[0],
+                    id: 1,
+                    avatarUrl: 'https://image.flaticon.com/icons/svg/2446/2446032.svg',
+                },
+                text: 'Hi',
+                type: 'text',
+                timestamp: 1578366393250,
+            },
+            {
+                author: { username: 'user2', id: 2, avatarUrl: null },
+                text: 'Show two buttons',
+                type: 'text',
+                timestamp: 1578366425250,
+                buttons: [
+                    {
+                        type: 'URL',
+                        title: 'Yahoo',
+                        payload: 'http://www.yahoo.com',
+                    },
+                    {
+                        type: 'URL',
+                        title: 'Example',
+                        payload: 'http://www.example.com',
+                    },
+                ],
+            },
+            {
+                author: {
+                    username: currentUser?.name.split(" ")[0],
+                    id: 1,
+                    avatarUrl: 'https://image.flaticon.com/icons/svg/2446/2446032.svg',
+                },
+                text: "What's up?",
+                type: 'text',
+                timestamp: 1578366425250,
+                hasError: true,
+            },
+        ],
+    )
 
-        socket.on('message', message => {
-            setMessages([...messages, ...[message]]);
-        });
-
-        socket.emit('sendMessage', { message }, () => setMessage(''))
-    }, []);
-
-    const updateMessage = (event) => {
-        setMessage(event.target.value);
-    }
+    const handleOnSendMessage = (message) => {
+        setMessages(
+            messages.concat({
+                author: {
+                    username: currentUser?.name.split(" ")[0],
+                    id: 1,
+                    avatarUrl: 'https://image.flaticon.com/icons/svg/2446/2446032.svg',
+                },
+                text: message,
+                timestamp: +new Date(),
+                type: 'text',
+            }),
+        );
+    };
 
     return (
-        <>
-            <div style={{ marginLeft: '100px', height: '200px', border: '1px solid black', width: '100%' }}>
-
-            </div>
-            <div>
-                <input onClick={updateMessage} style={{ width: '100%', marginLeft: '100px' }}></input>
-            </div>
-        </>
+        
+        
+        <ChatBox
+            messages={messages}
+            userId={1}
+            onSendMessage={handleOnSendMessage}
+            width={`calc(${windowWidth}px - 475px)`}
+            height={`calc(${windowHeight}px)`}
+        />
     )
+
 
 
 

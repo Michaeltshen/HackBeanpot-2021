@@ -94,9 +94,9 @@ function WorkspaceContainer(props) {
     }
     return (
         <div style={{display: 'flex', flexDirection: 'row'}}>
-            <ProjectPane projects={user?.projects} currentProject={currentProject} setCurrentProject={setCurrentProject} users={getUsersForProject()}/>
+            <ProjectPane projects={user?.projects} currentProject={currentProject} setCurrentProject={setCurrentProject} users={getUsersForProject()} currentUser={user}/>
             {/* <ParticipantsPane /> */}
-            <NavBar currentProject={currentProject}/>
+            <NavBar currentProject={currentProject} tasks={getUserTasks()} currentUser={user}/>
             {/* YOU NEED TO SWITCH BETWEEN CALENDAR, TASK DASHBOARD, AND CHAT VIEW */}
             <TaskView tasks={getUserTasks()} />
         </div>

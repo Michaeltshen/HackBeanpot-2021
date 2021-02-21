@@ -17,7 +17,7 @@ function Test() {
   }, [])
   return (
   <div style = {{padding: "10vh", paddingBottom: "0"}}>
-      <h1 style={{margin: "0", fontSize:"4em"}}>Hack Beanpot 2021</h1> 
+      <h1 style={{margin: "0", fontSize:"4em"}}>Track N' Plan</h1> 
       <h2>RAM^2</h2>
       <h3>For more productive planning, together.</h3>
       {contacts.map((contact, index) => {
